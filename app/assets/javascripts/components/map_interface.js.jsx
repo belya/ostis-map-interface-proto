@@ -15,6 +15,10 @@ var MapInterface = React.createClass({
     this.setState({chosen: object})
   },
 
+  onTimeChange: function(time) {
+    console.log(time)
+  },
+
   createViewer: function() {
     if (this.state.chosen)
       return <Article object={this.state.chosen} onListClick={this.onListClick}/>
@@ -29,9 +33,9 @@ var MapInterface = React.createClass({
         <div className="row" style={{margin: "10px"}}>
           <div className="col-sm-4 well">
             <div className="form-group">
-              <input type="text" className="form-control" placeholder="Задайте вопрос"></input>
+              <QuestionLine/>
             </div>
-            <Timeline/>
+            <Timeline onTimeChange={this.onTimeChange}/>
             {this.createViewer()}
           </div>
         </div>

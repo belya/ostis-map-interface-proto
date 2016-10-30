@@ -20,11 +20,11 @@ var List = React.createClass({
 
   render: function() {
     return (
-      <div className="list-group" ref="list" style={{"overflow-y": "auto", "max-height": "450px"}}>
+      <div className="list-group" ref="list" style={{overflowY: "auto", maxHeight: "450px"}}>
         {
           this.props.objects.map(function(object, index) {
             return (
-              <a key={index} href="#" className="list-group-item" onClick={this.props.onArticleClick.bind(this, object)}>
+              <a key={index} href="#" className="list-group-item" onClick={this.props.onArticleClick.bind(null, object)}>
                 <h4 className="list-group-item-heading">{object.title}</h4>
                 <div className="row">
                   <div className="col-sm-5">

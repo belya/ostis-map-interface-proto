@@ -7,7 +7,7 @@ var Article = React.createClass({
   render: function() {
     return (
       <div className="panel panel-default">
-        <div className="panel-body" style={{"overflow-y": "auto", "max-height": "400px"}}>
+        <div className="panel-body" style={{overflowY: "auto", maxHeight: "400px"}}>
           <h4>{this.props.object.title}</h4>
           <img src={this.props.object.image} className="img-thumbnail"></img>
           <p className="list-group-item-text">{this.props.object.description}</p>
