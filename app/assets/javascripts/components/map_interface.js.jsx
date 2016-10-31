@@ -1,6 +1,7 @@
 var MapInterface = React.createClass({
   propTypes: {
-    objects: React.PropTypes.array
+    objects: React.PropTypes.array,
+    questions: React.PropTypes.array
   },
 
   getInitialState: function() {
@@ -15,7 +16,7 @@ var MapInterface = React.createClass({
     this.setState({chosen: object})
   },
 
-  onTimeChange: function(time) {
+  onAgentParamsChange: function(time) {
     console.log(time)
   },
 
@@ -33,9 +34,9 @@ var MapInterface = React.createClass({
         <div className="row" style={{margin: "10px"}}>
           <div className="col-sm-4 well">
             <div className="form-group">
-              <QuestionLine/>
+              <QuestionLine onChange={this.onAgentParamsChange} questions={this.props.questions}/>
             </div>
-            <Timeline onTimeChange={this.onTimeChange}/>
+            <Timeline onTimeChange={this.onAgentParamsChange}/>
             {this.createViewer()}
           </div>
         </div>

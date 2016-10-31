@@ -24,7 +24,7 @@ var List = React.createClass({
         {
           this.props.objects.map(function(object, index) {
             return (
-              <a key={index} href="#" className="list-group-item" onClick={this.props.onArticleClick.bind(null, object)}>
+              <a key={index} href="#" className="list-group-item" onClick={() => this.props.onArticleClick(object)}>
                 <h4 className="list-group-item-heading">{object.title}</h4>
                 <div className="row">
                   <div className="col-sm-5">

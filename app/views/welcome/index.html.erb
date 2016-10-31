@@ -1,1 +1,1 @@
-<%= react_component('MapInterface', JSON.parse(File.read('public/objects.json'))) %>
+<%= react_component('MapInterface', objects: JSON.parse(File.read('public/objects.json')), questions: JSON.parse(File.read('public/questions.json'))) %>
