@@ -7,6 +7,7 @@
 //= require readmore/readmore.min
 //= require slider/bootstrap-slider
 //= require slider/bootstrap-slider
+//= require leaflet
 //= require react
 //= require react_ujs
 //= require autocomplete/react-autocomplete

@@ -4,6 +4,7 @@
  *= require readable/loader
  *= require readable/bootswatch
  *= require slider/bootstrap-slider
+ *= require leaflet
  *= require custom
 */
 

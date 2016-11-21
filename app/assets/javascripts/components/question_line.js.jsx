@@ -16,8 +16,9 @@ var QuestionLine = React.createClass({
     return a.toLowerCase().indexOf(value.toLowerCase()) > b.toLowerCase().indexOf(value.toLowerCase()) ? 1 : -1;
   },
 
-  onChange: function(value) {
-    this.props.onChange({question: value});
+  onChange: function(value, notify) {
+    if (notify)
+      this.props.onChange({question: value});
     this.setState({question: value});
   },
 
@@ -43,7 +44,7 @@ var QuestionLine = React.createClass({
         shouldItemRender={this.matchStateToTerm}
         sortItems={this.sortStates}
         onChange={(event, value) => this.onChange(value)}
-        onSelect={value => this.onChange(value)}
+        onSelect={value => this.onChange(value, true)}
         getItemValue={(item) => item}
         renderItem={(item, isHighlighted) => (
           <div className="question">{item}</div>

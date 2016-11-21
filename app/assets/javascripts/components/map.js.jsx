@@ -13,16 +13,22 @@ var Map = React.createClass({
   },
 
   createMap: function() {
-    this.state.map = new google.maps.Map(this.refs.map, {
-      zoom: 18,
-      center: {lat: 53.90373, lng: 27.55768},
-    });
+    this.state.map = new L.Map('map', {zoomControl: false});
+    var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 20});
+    this.state.map.addLayer(osm);
+  },
+
+  fixZoomControls: function() {
+    new L.control.zoom({position: 'bottomright'})
+      .addTo(this.state.map);
   },
 
   clearMap: function() {
     //TODO clear array
+    var map = this.state.map;
     this.state.markers.map(function(marker) {
-      marker.setMap(null);
+      map.removeMarker(marker);
     })
   },
 
@@ -30,15 +36,10 @@ var Map = React.createClass({
     var state = this.state;
     var onMarkerClick = this.props.onMarkerClick;
     this.props.objects.map(function(object) {
-      var marker = new google.maps.Marker({
-        position: {lat: object.lat, lng: object.lng},
-        map: state.map,
-        title: object.title
-      });
-      state.map.setCenter({lat: object.lat, lng: object.lng});
-      marker.addListener('click', function() {
-        onMarkerClick(object);
-      });
+      var marker = new L.Marker([object.lat, object.lng])
+        .addTo(state.map)
+        .on('click', () => onMarkerClick(object));
+      state.map.setView(new L.LatLng(object.lat, object.lng), 18);
       state.markers.push(marker);
     })
   },
@@ -46,19 +47,18 @@ var Map = React.createClass({
   componentDidMount: function() {
     this.createMap();
     this.addMarkersToMap();
+    this.fixZoomControls();
   },
 
   setCenter: function() {
-    if (this.props.chosen) {
-      this.state.map.setCenter({lat: this.props.chosen.lat, lng: this.props.chosen.lng});
-      this.state.map.setZoom(18);
-    }
+    if (this.props.chosen) 
+      this.state.map.setView(new L.LatLng(this.props.chosen.lat, this.props.chosen.lng), 18);
   },
 
   render: function() {
     this.setCenter();
     return (
-      <div ref="map" style={{position: "absolute", top: "0px", left: "0px", width: "100%", height: "100%"}}></div>
+      <div id="map" style={{position: "absolute", top: "0px", left: "0px", width: "100%", height: "100%"}}></div>
     );
   }
 });
